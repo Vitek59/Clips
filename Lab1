@@ -1,248 +1,358 @@
-(deftemplate Симптомы
-  (slot ухудшение-самочувствие (type SYMBOL))
-  (slot температура-тела (type SYMBOL))
-  (slot интоксикация (type SYMBOL))
-  (slot насморк-заложенность-носа (type SYMBOL))
-  (slot чихание (type SYMBOL))
-  (slot боль-в-горле-покраснение (type SYMBOL))
-  (slot головная-боль (type SYMBOL))
-  (slot утомляемость (type SYMBOL))
-  (slot бессонница (type SYMBOL))
-  (slot боль-в-мышцах (type SYMBOL))
-  (slot сухость-в-горле (type SYMBOL))
-  (slot слабость (type SYMBOL))
-  (slot кашель (type SYMBOL))
-  (slot затрудненное-дыхание (type SYMBOL))
-  (slot боль-в-груди (type SYMBOL))
+(deftemplate Symptom
+    (slot type (type SYMBOL))
+    (slot present (type SYMBOL))
 )
 
-;; Правила для гриппа
-(defrule Rule1-Грипп
-  (Симптомы (ухудшение-самочувствие да)
-             (насморк-заложенность-носа да))
-  =>
-  (printout t "Может быть насморк при гриппе" crlf)
+(deftemplate EarlySymptomDetected
+    (slot detected (type SYMBOL))
 )
 
-(defrule Rule2-Грипп
-  (Симптомы (ухудшение-самочувствие да)
-             (температура-тела 37-38 да))
-  =>
-  (printout t "Может быть повышение температуры при гриппе" crlf)
+(deffacts KnownSymptoms
+    (Symptom (type runny-nose) (present yes))
+    (Symptom (type nasal-congestion) (present yes))
+    (Symptom (type sneezing) (present yes))
+    (Symptom (type headache) (present yes))
+    (Symptom (type fatigue) (present yes))
+    (Symptom (type sore-throat) (present yes))
+    (Symptom (type body-temperature) (present yes))
+    (Symptom (type muscle-pain) (present yes))
+    (Symptom (type cough) (present yes))
+    (Symptom (type breathing-difficulty) (present yes))
+    (Symptom (type throat-dryness) (present yes))
+    (Symptom (type chest-pain) (present yes))
+    (Symptom (type intoxication) (present yes))
+    (Symptom (type weakness) (present yes))
+    (Symptom (type insomnia) (present yes))
+    (Symptom (type general-symptoms) (present yes))
 )
 
-(defrule Rule3-Грипп
-  (Симптомы (боль-в-горле-покраснение да))
-  =>
-  (printout t "Может быть боль в горле при гриппе" crlf)
+; Правила для ОРВИ
+(defrule rule-1-ORVI
+    (and
+        (Symptom (type runny-nose) (present yes))
+        (Symptom (type nasal-congestion) (present yes))
+        (Symptom (type sneezing) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Насморк, заложенность носа и чихание: Первичные симптомы, указывающие на начало ОРВИ, характеризующиеся поражением верхних дыхательных путей." crlf)
 )
 
-(defrule Rule4-Грипп
-  (Симптомы (интоксикация да)
-             (головная-боль да))
-  =>
-  (printout t "Может быть интоксикация и головная боль при гриппе" crlf)
+(defrule rule-2-ORVI
+    (and
+        (Symptom (type headache) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Головная боль и утомляемость: Распространенные симптомы ОРВИ, часто сопровождающиеся чувством усталости и дискомфорта в голове." crlf)
 )
 
-(defrule Rule5-Грипп
-  (Симптомы (температура-тела 39-40 да)
-             (бессонница да))
-  =>
-  (printout t "Может быть высокая температура и бессонница при гриппе" crlf)
+(defrule rule-3-ORVI
+    (and
+        (Symptom (type sore-throat) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Боль в горле, покраснение и слабость: Воспаление горла и общая слабость могут свидетельствовать о начале ОРВИ." crlf)
 )
 
-(defrule Rule6-Грипп
-  (Симптомы (боль-в-горле-покраснение да)
-             (головная-боль да)
-             (утомляемость да))
-  =>
-  (printout t "Может быть боль в горле, головная боль и утомляемость при гриппе" crlf)
+(defrule rule-4-ORVI
+    (and
+        (Symptom (type body-temperature) (present yes))
+        (Symptom (type muscle-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Температура тела и боль в мышцах: Повышенная температура и боли в мышцах, часто связанные с ОРВИ." crlf)
+)
+(defrule rule-5-ORVI
+    (and
+        (Symptom (type cough) (present yes))
+        (Symptom (type breathing-difficulty) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Кашель и затрудненное дыхание: При прогрессировании ОРВИ могут возникнуть симптомы, связанные с нижними дыхательными путями." crlf)
 )
 
-(defrule Rule7-Грипп
-  (Симптомы (боль-в-горле-покраснение да)
-             (интоксикация да)
-             (ухудшение-самочувствие внезапное да))
-  =>
-  (printout t "Может быть боль в горле, интоксикация и внезапное ухудшение самочувствия при гриппе" crlf)
+(defrule rule-6-ORVI
+    (and
+        (Symptom (type throat-dryness) (present yes))
+        (Symptom (type chest-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Сухость в горле и боль в груди: ОРВИ иногда могут вызывать сухость в горле и дискомфорт или боль в груди, особенно при осложнениях." crlf)
 )
 
-(defrule Rule8-Грипп
-  (Симптомы (температура-тела 38-39 да)
-             (боль-в-горле-покраснение да)
-             (головная-боль да))
-  =>
-  (printout t "Может быть повышенная температура, боль в горле и головная боль при гриппе" crlf)
+(defrule rule-7-ORVI
+    (and
+        (Symptom (type intoxication) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Интоксикация и слабость: Общее отравление и ослабление организма могут быть результатом ОРВИ." crlf)
 )
 
-(defrule Rule9-Грипп
-  (Симптомы (температура-тела 38-39 да)
-             (головная-боль да)
-             (бессонница да))
-  =>
-  (printout t "Может быть повышенная температура, головная боль и бессонница при гриппе" crlf)
+(defrule rule-8-ORVI
+    (and
+        (Symptom (type insomnia) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Бессонница и утомляемость: Симптомы дискомфорта, связанные с бессонницей и усталостью, часто сопровождающие ОРВИ." crlf)
 )
 
-(defrule Rule10-Грипп
-  (Симптомы (интоксикация да)
-             (головная-боль да)
-             (бессонница да))
-  =>
-  (printout t "Может быть интоксикация, головная боль и бессонница при гриппе" crlf)
+(defrule rule-9-ORVI
+    (and
+        (Symptom (type chest-pain) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Боль в груди и слабость: Сочетание боли в груди и общей слабости может указывать на тяжелые формы ОРВИ." crlf)
 )
 
-(defrule Rule11-Грипп
-  (Симптомы (температура-тела 38-39 да)
-             (утомляемость да)
-             (боль-в-горле-покраснение да))
-  =>
-  (printout t "Может быть повышенная температура, утомляемость и боль в горле при гриппе" crlf)
+(defrule rule-10-ORVI
+    (and
+        (Symptom (type body-temperature) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Температура тела и утомляемость: Высокая температура, сопровождаемая усталостью, свидетельствует о борьбе организма с инфекцией." crlf)
 )
 
-(defrule Rule12-Грипп
-  (Симптомы (насморк-заложенность-носа да)
-             (головная-боль да)
-             (утомляемость да))
-  =>
-  (printout t "Может быть насморк, головная боль и утомляемость при гриппе" crlf)
+(defrule rule-11-ORVI
+    (and
+        (Symptom (type headache) (present yes))
+        (Symptom (type cough) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Головная боль и кашель: Сочетание головной боли и кашля характерно для некоторых видов ОРВИ, требующих внимания." crlf)
 )
 
-(defrule Rule13-Грипп
-  (Симптомы (боль-в-горле-покраснение да)
-             (интоксикация да)
-             (бессонница да))
-  =>
-  (printout t "Может быть боль в горле, интоксикация и бессонница при гриппе" crlf)
+(defrule rule-12-ORVI
+    (and
+        (Symptom (type throat-dryness) (present yes))
+        (Symptom (type breathing-difficulty) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Сухость в горле и затрудненное дыхание: Эти симптомы могут быть индикатором наличия осложнений ОРВИ." crlf)
 )
 
-(defrule Rule14-Грипп
-  (Симптомы (ухудшение-самочувствие внезапное да)
-             (насморк-заложенность-носа да)
-             (бессонница да))
-  =>
-  (printout t "Может быть внезапное ухудшение самочувствия, насморк и бессонница при гриппе" crlf)
+(defrule rule-13-ORVI
+    (and
+        (Symptom (type runny-nose) (present yes))
+        (Symptom (type chest-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Насморк, заложенность носа и боль в груди: Различные симптомы, указывающие на влияние вируса на верхние и нижние дыхательные пути." crlf)
 )
 
-(defrule Rule15-Грипп
-  (Симптомы (головная-боль да)
-             (бессонница да)
-             (утомляемость да))
-  =>
-  (printout t "Может быть головная боль, бессонница и утомляемость при гриппе" crlf)
+(defrule rule-14-ORVI
+    (and
+        (Symptom (type sneezing) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Чихание и слабость: Наличие чихания, сочетаемое с общей слабостью, может указывать на развитие ОРВИ." crlf)
 )
 
-;; Правила для ОРВИ
-(defrule Rule1-ОРВИ
-  (Симптомы (ухудшение-самочувствие да)
-             (насморк-заложенность-носа да))
-  =>
-  (printout t "Может быть насморк при ОРВИ" crlf)
+(defrule rule-15-ORVI
+    (and
+        (Symptom (type general-symptoms) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Общие симптомы: Говорят о наличии инфекции, что может указывать на ОРВИ, требующие медицинского вмешательства и лечения." crlf)
 )
 
-(defrule Rule2-ОРВИ
-  (Симптомы (ухудшение-самочувствие да)
-             (температура-тела 37-38 да))
-  =>
-  (printout t "Может быть повышение температуры при ОРВИ" crlf)
+; Правила для гриппа
+(defrule rule-1-Grip
+    (and
+        (Symptom (type runny-nose) (present yes))
+        (Symptom (type nasal-congestion) (present yes))
+        (Symptom (type sneezing) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Насморк, заложенность носа и чихание: Первичные симптомы, указывающие на начало гриппа, обычно характеризуются закладыванием носа, чиханием и раздражением верхних дыхательных путей." crlf)
 )
 
-(defrule Rule3-ОРВИ
-  (Симптомы (боль-в-горле-покраснение да))
-  =>
-  (printout t "Может быть боль в горле при ОРВИ" crlf)
+(defrule rule-2-Grip
+    (and
+        (Symptom (type headache) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Головная боль и утомляемость: Грипп часто сопровождается сильной головной болью, ощущением усталости, иногда даже выраженной слабостью и общим дискомфортом в теле." crlf)
 )
 
-(defrule Rule4-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (боль-в-горле-покраснение да)
-             (утомляемость да))
-  =>
-  (printout t "Может быть насморк, боль в горле и утомляемость при ОРВИ" crlf)
+(defrule rule-3-Grip
+    (and
+        (Symptom (type sore-throat) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Боль-в-горле-покраснение и слабость: Подобно ОРВИ, грипп также может вызвать покраснение горла, боли и общую слабость, указывая на воспалительные процессы в организме." crlf)
 )
 
-(defrule Rule5-ОРВИ
-  (Симптомы (температура-тела 37-38 да)
-             (ухудшение-самочувствие внезапное да))
-  =>
-  (printout t "Может быть повышение температуры и внезапное ухудшение самочувствия при ОРВИ" crlf)
+(defrule rule-4-Grip
+    (and
+        (Symptom (type body-temperature) (present yes))
+        (Symptom (type muscle-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Температура-тела и боль-в-мышцах: Повышенная температура тела, часто сопровождаемая болью в мышцах, является распространенным симптомом гриппа, свидетельствующим о бодрствующем иммунном ответе." crlf)
 )
 
-(defrule Rule6-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (боль-в-горле-покраснение да)
-             (головная-боль да))
-  =>
-  (printout t "Может быть насморк, боль в горле и головная боль при ОРВИ" crlf)
+(defrule rule-5-Grip
+    (and
+        (Symptom (type cough) (present yes))
+        (Symptom (type breathing-difficulty) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Кашель и затрудненное дыхание: Грипп может привести к кашлю и затрудненному дыханию в случае развития осложнений." crlf)
 )
 
-(defrule Rule7-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (утомляемость да)
-             (бессонница да))
-  =>
-  (printout t "Может быть насморк, утомляемость и бессонница при ОРВИ" crlf)
+(defrule rule-6-Grip
+    (and
+        (Symptom (type throat-dryness) (present yes))
+        (Symptom (type chest-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Сухость в горле и боль в груди: Эти симптомы могут указывать на прогрессирование гриппа и его негативное воздействие на организм." crlf)
 )
 
-(defrule Rule8-ОРВИ
-  (Симптомы (боль-в-горле-покраснение да)
-             (головная-боль да)
-             (ухудшение-самочувствие внезапное да))
-  =>
-  (printout t "Может быть боль в горле, головная боль и внезапное ухудшение самочувствия при ОРВИ" crlf)
+(defrule rule-7-Grip
+    (and
+        (Symptom (type intoxication) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Интоксикация и слабость: Грипп может привести к сильному общему недомоганию и ощущению отравления." crlf)
 )
 
-(defrule Rule9-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (температура-тела 37-38 да)
-             (головная-боль да))
-  =>
-  (printout t "Может быть насморк, повышение температуры и головная боль при ОРВИ" crlf)
+(defrule rule-8-Grip
+    (and
+        (Symptom (type insomnia) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Бессонница и утомляемость: Симптомы гриппа могут включать в себя бессонницу и усталость из-за активного борьбы организма с инфекцией." crlf)
 )
 
-(defrule Rule10-ОРВИ
-  (Симптомы (боль-в-горле-покраснение да)
-             (утомляемость да)
-             (бессонница да))
-  =>
-  (printout t "Может быть боль в горле, утомляемость и бессонница при ОРВИ" crlf)
+(defrule rule-9-Grip
+    (and
+        (Symptom (type chest-pain) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Боль в груди и слабость: Грипп может проявляться болью в груди и ощущением слабости в связи с его негативным воздействием на организм." crlf)
 )
 
-(defrule Rule11-ОРВИ
-  (Симптомы (температура-тела 38 да)
-             (головная-боль да)
-             (боль-в-горле-покраснение да))
-  =>
-  (printout t "Может быть повышение температуры, головная боль и боль в горле при ОРВИ" crlf)
+(defrule rule-10-Grip
+    (and
+        (Symptom (type body-temperature) (present yes))
+        (Symptom (type fatigue) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Температура тела и утомляемость: Высокая температура и усталость, обычно сопровождающие грипп, указывают на борьбу организма с инфекцией." crlf)
 )
 
-(defrule Rule12-ОРВИ
-  (Симптомы (головная-боль да)
-             (боль-в-горле-покраснение да)
-             (бессонница да))
-  =>
-  (printout t "Может быть головная боль, боль в горле и бессонница при ОРВИ" crlf)
+(defrule rule-11-Grip
+    (and
+        (Symptom (type headache) (present yes))
+        (Symptom (type cough) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Головная боль и кашель: Сочетание головной боли и кашля часто наблюдается при развитии гриппа." crlf)
 )
 
-(defrule Rule13-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (бессонница да)
-             (ухудшение-самочувствие внезапное да))
-  =>
-  (printout t "Может быть насморк, бессонница и внезапное ухудшение самочувствия при ОРВИ" crlf)
+(defrule rule-12-Grip
+    (and
+        (Symptom (type throat-dryness) (present yes))
+        (Symptom (type breathing-difficulty) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Сухость в горле и затрудненное дыхание: Эти симптомы могут свидетельствовать о возможных осложнениях гриппа." crlf)
 )
 
-(defrule Rule14-ОРВИ
-  (Симптомы (утомляемость да)
-             (бессонница да)
-             (ухудшение-самочувствие внезапное да))
-  =>
-  (printout t "Может быть утомляемость, бессонница и внезапное ухудшение самочувствия при ОРВИ" crlf)
+(defrule rule-13-Grip
+    (and
+        (Symptom (type runny-nose) (present yes))
+        (Symptom (type chest-pain) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Насморк, заложенность носа и боль в груди: Эти симптомы могут указывать на развитие гриппа, оказывающего воздействие на верхние и нижние дыхательные пути." crlf)
 )
 
-(defrule Rule15-ОРВИ
-  (Симптомы (насморк-заложенность-носа да)
-             (боль-в-горле-покраснение да)
-             (интоксикация да))
-  =>
-  (printout t "Может быть насморк, боль в горле и интоксикация при ОРВИ" crlf)
+(defrule rule-14-Grip
+    (and
+        (Symptom (type sneezing) (present yes))
+        (Symptom (type weakness) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Чихание и слабость: Наличие чихания, сопровождаемое общей слабостью, может свидетельствовать о развитии гриппа." crlf)
+)
+
+(defrule rule-15-Grip
+    (and
+        (Symptom (type general-symptoms) (present yes))
+    )
+    (not (EarlySymptomDetected (detected ?)))
+    =>
+    (assert (EarlySymptomDetected (detected yes)))
+    (printout t "Общие симптомы: Общие симптомы инфекции, как правило, указывают на присутствие гриппа, который требует лечения и медицинского вмешательства." crlf)
 )
