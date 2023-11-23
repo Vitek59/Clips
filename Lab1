@@ -3,7 +3,7 @@
     (slot present (type SYMBOL))
 )
 
-(deftemplate EarlySymptomDetected
+(deftemplate Early Symptom Detected
     (slot detected (type SYMBOL))
 )
 
@@ -33,9 +33,9 @@
         (Symptom (type nasal-congestion) (present yes))
         (Symptom (type sneezing) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to upper respiratory tract infection ?)))
+    (not (Early Symptom Detected (detected Deterioration due to upper respiratory tract infection ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to upper respiratory tract infection ?yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to upper respiratory tract infection ?yes)))
     (printout t "Runny nose, nasal congestion, and sneezing: Primary symptoms indicating the onset of ARVI, characterized by upper respiratory tract infection." crlf)
 )
 
@@ -44,9 +44,9 @@
         (Symptom (type headache) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to feelings of fatigue and discomfort in the head ?)))
+    (not (Early Symptom Detected (detected Deterioration due to feelings of fatigue and discomfort in the head ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to feelings of fatigue and discomfort in the head yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to feelings of fatigue and discomfort in the head yes)))
     (printout t "Headache and fatigue: Common symptoms of ARVI, often accompanied by feelings of fatigue and discomfort in the head." crlf)
 )
 
@@ -55,9 +55,9 @@
         (Symptom (type sore-throat) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to throat inflammation and overall weakness ?)))
+    (not (Early Symptom Detected (detected Deterioration due to throat inflammation and overall weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to throat inflammation and overall weakness yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to throat inflammation and overall weakness yes)))
     (printout t "Sore throat, redness, and weakness: Throat inflammation and overall weakness may indicate the onset of ARVI." crlf)
 )
 
@@ -67,9 +67,9 @@
         (Symptom (type body-temperature <=38) (present yes))
         (Symptom (type muscle-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to elevated body temperature and muscle pain ?)))
+    (not (Early Symptom Detected (detected Deterioration due to elevated body temperature and muscle pain ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to elevated body temperature and muscle pain yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to elevated body temperature and muscle pain yes)))
     (printout t "Body temperature and muscle pain: Elevated body temperature and muscle pain, often associated with ARVI." crlf)
 )
 
@@ -78,9 +78,9 @@
         (Symptom (type cough) (present yes))
         (Symptom (type breathing-difficulty) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to lower respiratory tract involvement ?)))
+    (not (Early Symptom Detected (detected Deterioration due to lower respiratory tract involvement ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to lower respiratory tract involvement yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to lower respiratory tract involvement yes)))
     (printout t "Cough and difficulty breathing: As ARVI progresses, symptoms associated with lower respiratory tract involvement may arise." crlf)
 )
 
@@ -90,9 +90,9 @@
         (Symptom (type throat-dryness) (present yes))
         (Symptom (type chest-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to throat dryness and discomfort or chest pain ?)))
+    (not (Early Symptom Detected (detected Deterioration due to throat dryness and discomfort or chest pain ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to throat dryness and discomfort or chest pain yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to throat dryness and discomfort or chest pain yes)))
     (printout t "Throat dryness and chest pain: ARVI can sometimes cause throat dryness and discomfort or chest pain, especially with complications." crlf)
 )
 
@@ -101,9 +101,9 @@
         (Symptom (type intoxication) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to poisoning and body weakness ?)))
+    (not (Early Symptom Detected (detected Deterioration due to poisoning and body weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to poisoning and body weakness yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to poisoning and body weakness yes)))
     (printout t "Intoxication and weakness: General poisoning and body weakness can be a result of ARVI." crlf)
 )
 
@@ -112,9 +112,9 @@
         (Symptom (type insomnia) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to discomfort associated with insomnia and fatigue ?)))
+    (not (Early Symptom Detected (detected Deterioration due to discomfort associated with insomnia and fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to discomfort associated with insomnia and fatigue yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to discomfort associated with insomnia and fatigue yes)))
     (printout t "Insomnia and fatigue: Discomfort associated with insomnia and fatigue often accompany ARVI." crlf)
 )
 
@@ -123,9 +123,9 @@
         (Symptom (type chest-pain) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to chest pain and overall weakness ?)))
+    (not (Early Symptom Detected (detected Deterioration due to chest pain and overall weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to chest pain and overall weakness yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to chest pain and overall weakness yes)))
     (printout t "Chest pain and weakness: Combination of chest pain and overall weakness might indicate severe forms of ARVI." crlf)
 )
 
@@ -135,9 +135,9 @@
         (Symptom (type body-temperature >38) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to high temperature accompanied by fatigue ?)))
+    (not (Early Symptom Detected (detected Deterioration due to high temperature accompanied by fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to high temperature accompanied by fatigue yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to high temperature accompanied by fatigue yes)))
     (printout t "Body temperature and fatigue: High temperature accompanied by fatigue indicates the body fighting an infection." crlf)
 )
 
@@ -146,9 +146,9 @@
         (Symptom (type headache) (present yes))
         (Symptom (type cough) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to headache and cough ?)))
+    (not (Early Symptom Detected (detected Deterioration due to headache and cough ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to headache and cough yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to headache and cough yes)))
     (printout t "Headache and cough: Combination of headache and cough is typical for some types of ARVI that require attention." crlf)
 )
 
@@ -157,9 +157,9 @@
         (Symptom (type throat-dryness) (present yes))
         (Symptom (type breathing-difficulty) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to throat dryness ?)))
+    (not (Early Symptom Detected (detected Deterioration due to throat dryness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to throat dryness yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to throat dryness yes)))
     (printout t "Throat dryness and difficulty breathing: These symptoms might indicate complications of ARVI." crlf)
 )
 
@@ -168,9 +168,9 @@
         (Symptom (type runny-nose) (present yes))
         (Symptom (type chest-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to virus affecting both upper and lower respiratory tracts ?)))
+    (not (Early Symptom Detected (detected Deterioration due to virus affecting both upper and lower respiratory tracts ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to virus affecting both upper and lower respiratory tracts yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to virus affecting both upper and lower respiratory tracts yes)))
     (printout t "Runny nose, nasal congestion, and chest pain: Various symptoms indicating the virus affecting both upper and lower respiratory tracts." crlf)
 )
 
@@ -180,9 +180,9 @@
         (Symptom (type sneezing) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Deterioration due to sneezing combined with overall weakness ?)))
+    (not (Early Symptom Detected (detected Deterioration due to sneezing combined with overall weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Deterioration due to sneezing combined with overall weakness yes)))
+    (assert (Early Symptom Detected (detected Deterioration due to sneezing combined with overall weakness yes)))
     (printout t "Sneezing and weakness: Presence of sneezing combined with overall weakness may indicate the development of ARVI." crlf)
 )
 
@@ -190,9 +190,9 @@
     (and
         (Symptom (type general-symptoms) (present yes))
     )
-    (not (EarlySymptomDetected (detected ?)))
+    (not (Early Symptom Detected (detected ?)))
     =>
-    (assert (EarlySymptomDetected (detected yes)))
+    (assert (Early Symptom Detected (detected yes)))
     (printout t "General symptoms: Indicates the presence of infection, which may indicate ARVI requiring medical intervention and treatment." crlf)
 )
 
@@ -203,9 +203,9 @@
         (Symptom (type nasal-congestion) (present yes))
         (Symptom (type sneezing) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to stuffy nose, sneezing, and upper respiratory tract irritation ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to stuffy nose, sneezing, and upper respiratory tract irritation ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to stuffy nose, sneezing, and upper respiratory tract irritation yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to stuffy nose, sneezing, and upper respiratory tract irritation yes)))
     (printout t "Runny nose, nasal congestion, and sneezing: Primary symptoms indicating the onset of the flu often characterized by a stuffy nose, sneezing, and upper respiratory tract irritation." crlf)
 )
 
@@ -214,9 +214,9 @@
         (Symptom (type headache) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to severe headache, accompanied by a sense of fatigue ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to severe headache, accompanied by a sense of fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to severe headache, accompanied by a sense of fatigue yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to severe headache, accompanied by a sense of fatigue yes)))
     (printout t "Headache and fatigue: The flu often presents with a severe headache, a feeling of fatigue, and sometimes pronounced weakness and overall discomfort." crlf)
 )
 
@@ -225,9 +225,9 @@
         (Symptom (type sore-throat) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to throat redness, pain, and overall weakness ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to throat redness, pain, and overall weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to throat redness, pain, and overall weakness yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to throat redness, pain, and overall weakness yes)))
     (printout t "Sore throat and weakness: Similar to a cold, the flu can also cause throat redness, pain, and overall weakness, indicating inflammatory processes in the body." crlf)
 )
 
@@ -236,9 +236,9 @@
         (Symptom (type body-temperature >38) (present yes))
         (Symptom (type muscle-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to high body temperature often accompanied by muscle pain ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to high body temperature often accompanied by muscle pain ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to high body temperature often accompanied by muscle pain yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to high body temperature often accompanied by muscle pain yes)))
     (printout t "Body temperature and muscle pain: High body temperature, often accompanied by muscle pain, is a common symptom of the flu, indicating an active immune response." crlf)
 )
 
@@ -247,9 +247,9 @@
         (Symptom (type cough) (present yes))
         (Symptom (type breathing-difficulty) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to severe coughing and breathing difficulty ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to severe coughing and breathing difficulty ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to severe coughing and breathing difficulty yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to severe coughing and breathing difficulty yes)))
     (printout t "Cough and breathing difficulty: Unlike a common cold, the flu often causes severe coughing and, in some cases, may lead to breathing difficulties, especially with complications." crlf)
 )
 
@@ -258,9 +258,9 @@
         (Symptom (type throat-dryness) (present yes))
         (Symptom (type chest-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to throat dryness and discomfort or chest pain ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to throat dryness and discomfort or chest pain ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to throat dryness and discomfort or chest pain yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to throat dryness and discomfort or chest pain yes)))
     (printout t "Throat dryness and chest pain: The flu can also cause throat dryness and discomfort or chest pain, especially in those experiencing complications." crlf)
 )
 
@@ -269,9 +269,9 @@
         (Symptom (type intoxication) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to overall body weakness and fatigue ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to overall body weakness and fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to overall body weakness and fatigue yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to overall body weakness and fatigue yes)))
     (printout t "Intoxication and weakness: The flu is often accompanied by more pronounced intoxication, manifesting as overall body weakness and fatigue." crlf)
 )
 
@@ -280,9 +280,9 @@
         (Symptom (type insomnia) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to insomnia from general discomfort and fatigue ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to insomnia from general discomfort and fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to insomnia from general discomfort and fatigue yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to insomnia from general discomfort and fatigue yes)))
     (printout t "Insomnia and fatigue: People suffering from the flu often experience insomnia due to general discomfort and a sense of fatigue." crlf)
 )
 
@@ -291,9 +291,9 @@
         (Symptom (type chest-pain) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to severe forms of the flu often showing a combination of chest pain and general weakness ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to severe forms of the flu often showing a combination of chest pain and general weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to severe forms of the flu often showing a combination of chest pain and general weakness yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to severe forms of the flu often showing a combination of chest pain and general weakness yes)))
     (printout t "Chest pain and weakness: Similar to a common cold, severe forms of the flu may also exhibit a combination of chest pain and general weakness, requiring medical attention." crlf)
 )
 
@@ -302,9 +302,9 @@
         (Symptom (type body-temperature >=39) (present yes))
         (Symptom (type fatigue) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to high body temperature accompanied by fatigue ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to high body temperature accompanied by fatigue ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to high body temperature accompanied by fatigue yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to high body temperature accompanied by fatigue yes)))
     (printout t "Body temperature and fatigue: High body temperature accompanied by fatigue indicates the body's fight against flu infection." crlf)
 )
 
@@ -313,9 +313,9 @@
         (Symptom (type headache) (present yes))
         (Symptom (type cough) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to a combination of headache and cough ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to a combination of headache and cough ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to a combination of headache and cough yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to a combination of headache and cough yes)))
     (printout t "Headache and cough: Similar to a common cold, a combination of headache and cough is also typical for some types of flu that require attention." crlf)
 )
 
@@ -324,9 +324,9 @@
         (Symptom (type throat-dryness) (present yes))
         (Symptom (type breathing-difficulty) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to flu complications, especially when affecting the lower respiratory tract ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to flu complications, especially when affecting the lower respiratory tract ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to flu complications, especially when affecting the lower respiratory tract yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to flu complications, especially when affecting the lower respiratory tract yes)))
     (printout t "Throat dryness and breathing difficulty: Similar to a common cold, these symptoms may indicate flu complications, especially when affecting the lower respiratory tract." crlf)
 )
 
@@ -335,9 +335,9 @@
         (Symptom (type runny-nose) (present yes))
         (Symptom (type chest-pain) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to the flu affecting both upper and lower respiratory tracts ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to the flu affecting both upper and lower respiratory tracts ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to the flu affecting both upper and lower respiratory tracts yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to the flu affecting both upper and lower respiratory tracts yes)))
     (printout t "Runny nose, nasal congestion, and chest pain: Various symptoms indicating the flu's impact on both upper and lower respiratory tracts may occur simultaneously." crlf)
 )
 
@@ -346,9 +346,9 @@
         (Symptom (type sneezing) (present yes))
         (Symptom (type weakness) (present yes))
     )
-    (not (EarlySymptomDetected (detected Feeling worsened due to sneezing combined with general weakness ?)))
+    (not (Early Symptom Detected (detected Feeling worsened due to sneezing combined with general weakness ?)))
     =>
-    (assert (EarlySymptomDetected (detected Feeling worsened due to sneezing combined with general weakness yes)))
+    (assert (Early Symptom Detected (detected Feeling worsened due to sneezing combined with general weakness yes)))
     (printout t "Sneezing and weakness: The presence of sneezing accompanied by general weakness may indicate the development of the flu." crlf)
 )
 
@@ -356,8 +356,8 @@
     (and
         (Symptom (type general-symptoms) (present yes))
     )
-    (not (EarlySymptomDetected (detected ?)))
+    (not (Early Symptom Detected (detected ?)))
     =>
-    (assert (EarlySymptomDetected (detected yes)))
+    (assert (Early Symptom Detected (detected yes)))
     (printout t "General symptoms: General infection symptoms usually indicate the presence of the flu, requiring treatment and medical intervention." crlf)
 )
